@@ -1,17 +1,14 @@
-﻿using Microsoft.Extensions.Hosting;
-using MediatR;
-using OrderSchduler.Application.Features.Order;
-using System;
-using System.Threading.Tasks;
+﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using OrderSchduler.Application.Features.Schedule.Querries;
+using Microsoft.Extensions.Hosting;
 using OrderSchduler.Application.Features.Itinerary;
+using System;
 
 namespace OrderScheduler
 {
     class Program
-	{
-		static void Main(string[] args)
+    {
+        static void Main(string[] args)
         {
             var host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices();
@@ -21,7 +18,7 @@ namespace OrderScheduler
             var itineraryQuery = new GetItineraryListQuery();
             var itineraries = mediator.Send(itineraryQuery).Result;
 
-            itineraries.ForEach(d => 
+            itineraries.ForEach(d =>
             {
                 Console.WriteLine(d.ToString());
                 d.Orders.ForEach(o => Console.WriteLine(o.ToString()));
