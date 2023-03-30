@@ -4,10 +4,10 @@ using OrderSchduler.Application.Contracts;
 using OrderSchduler.Application.Model;
 using OrderScheduler.Domain.Entities;
 
-namespace OrderSchduler.Application.Processes
+namespace OrderSchduler.Application.Provider
 {
     public class Scheduler : IScheduler
-    { 
+    {
         public Scheduler()
         {
         }

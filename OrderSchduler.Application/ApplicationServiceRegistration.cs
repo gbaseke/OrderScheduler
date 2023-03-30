@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using OrderSchduler.Application.Contracts;
-using OrderSchduler.Application.Processes;
+using OrderSchduler.Application.Provider;
 using System.Reflection;
 
 namespace OrderSchduler.Application
