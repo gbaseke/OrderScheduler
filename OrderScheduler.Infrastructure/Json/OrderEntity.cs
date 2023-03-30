@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace OrderScheduler.Domain.Entities
+namespace OrderScheduler.Infrastructure.Json
 {
     public record OrderEntity
     {
