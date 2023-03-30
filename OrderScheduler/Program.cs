@@ -1,9 +1,11 @@
-﻿using OrderScheduler.Application.Contracts;
-using OrderScheduler.Infrastructure.Json;
-using OrderScheduler.Infrastructure.InMemory;
-using OrderSchduler.Application.Processes;
+﻿using Microsoft.Extensions.Hosting;
+using MediatR;
+using OrderSchduler.Application.Features.Order;
 using System;
-using OrderSchduler.Application.Contracts;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using OrderSchduler.Application.Features.Schedule.Querries;
+using OrderSchduler.Application.Features.Itinerary;
 
 namespace OrderScheduler
 {
@@ -11,22 +13,20 @@ namespace OrderScheduler
 	{
 		static void Main(string[] args)
         {
-            // root container
-            IJsonOrderReader orderReader = new JsonOrderReader();
-            IInMemorySchedules scheduleQuery = new InMemorySchedules();
-            IScheduler scheduler = new Scheduler();
+            var host = Host.CreateDefaultBuilder(args)
+                .ConfigureServices();
 
-            // Get Schedules
-            var schedules = scheduleQuery.GetAllSchedules();
+            var mediator = host.Services.GetRequiredService<IMediator>();
 
-            // Print schedules
-            schedules.ForEach(schedule => Console.WriteLine(schedule.ToString()));
+            var scheduleQuery = new GetScheduleListQuery();
+            var schedules = mediator.Send(scheduleQuery).Result;
 
-            // Get orders
-            var orders = orderReader.GetOrders();
+            schedules.ForEach(d => Console.WriteLine(d.ToString()));
 
-            // Schedule orders
-            scheduler.Schedule(schedules, orders);
+            var itineraryQuery = new GetItineraryListQuery();
+            var itineraries = mediator.Send(itineraryQuery).Result;
+
+            itineraries.ForEach(d => Console.WriteLine(d.ToString()));
         }
     }
 }

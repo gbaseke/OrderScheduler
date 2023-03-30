@@ -10,8 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OrderSchduler.Application\OrderSchduler.Application.csproj" />
-    <ProjectReference Include="..\OrderScheduler.Domain\OrderScheduler.Domain.csproj" />
     <ProjectReference Include="..\OrderScheduler.Infrastructure\OrderScheduler.Infrastructure.csproj" />
   </ItemGroup>
 

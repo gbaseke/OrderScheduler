@@ -12,7 +12,7 @@ namespace OrderSchduler.Application.Processes
         {
         }
 
-        public void Schedule(List<Schedule> schedules, List<Order> orders)
+        public List<Itinerary> Schedule(List<Schedule> schedules, List<Order> orders)
         {
             var iteneraries = CreateIteneraries(schedules);
             foreach (var order in orders)
@@ -26,6 +26,8 @@ namespace OrderSchduler.Application.Processes
                     itenerary.Add(order);
                 }
             }
+
+            return iteneraries;
         }
 
         private List<Itinerary> CreateIteneraries(List<Schedule> schedules)

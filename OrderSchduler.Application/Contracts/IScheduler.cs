@@ -1,9 +1,10 @@
-﻿using OrderScheduler.Domain.Entities;
+﻿using OrderSchduler.Application.Model;
+using OrderScheduler.Domain.Entities;
 
 namespace OrderSchduler.Application.Contracts
 {
     public interface IScheduler
     {
-        void Schedule(List<Schedule> schedules, List<Order> orders);
+        List<Itinerary> Schedule(List<Schedule> schedules, List<Order> orders);
     }
 }

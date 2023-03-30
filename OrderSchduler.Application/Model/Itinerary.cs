@@ -20,11 +20,10 @@ namespace OrderSchduler.Application.Model
             {
                 Orders.Add(order);
                 Count++;
-                Console.WriteLine($"order: {order.Name}, flightNumber: {Schedule.ScheduleId}, departure: {Schedule.DepartureCity}, arrival: {Schedule.ArrivalCity}, day: {Schedule.DayId}");
+                
                 return true;
             }
-
-            Console.WriteLine($"order: {order.Name}, flightNumber: not scheduled");
+            
             return false;
         }
     }
