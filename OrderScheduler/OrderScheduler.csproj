@@ -2,11 +2,17 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OrderSchduler.Application\OrderSchduler.Application.csproj" />
+    <ProjectReference Include="..\OrderScheduler.Domain\OrderScheduler.Domain.csproj" />
+    <ProjectReference Include="..\OrderScheduler.Infrastructure\OrderScheduler.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,34 +1,32 @@
-﻿using Newtonsoft.Json;
+﻿using OrderScheduler.Application.Contracts;
+using OrderScheduler.Infrastructure.Json;
+using OrderScheduler.Infrastructure.InMemory;
+using OrderSchduler.Application.Processes;
 using System;
-using System.Collections.Generic;
-using System.IO;
+using OrderSchduler.Application.Contracts;
 
 namespace OrderScheduler
 {
     class Program
 	{
 		static void Main(string[] args)
-		{
-			var schedules = new List<Schedule>() {
-				new Schedule() { ArrivalCity = "YYZ", DayId = 1, DepartureCity = "YUL", ScheduleId = 1},
-				new Schedule() { ArrivalCity = "YYC", DayId = 1, DepartureCity = "YUL", ScheduleId = 2},
-				new Schedule() { ArrivalCity = "YVR", DayId = 1, DepartureCity = "YUL", ScheduleId = 3},
-				new Schedule() { ArrivalCity = "YYZ", DayId = 2, DepartureCity = "YUL", ScheduleId = 4},
-				new Schedule() { ArrivalCity = "YYC", DayId = 2, DepartureCity = "YUL", ScheduleId = 4},
-				new Schedule() { ArrivalCity = "YVR", DayId = 2, DepartureCity = "YUL", ScheduleId = 6}};
+        {
+            // root container
+            IJsonOrderReader orderReader = new JsonOrderReader();
+            IInMemorySchedules scheduleQuery = new InMemorySchedules();
+            IScheduler scheduler = new Scheduler();
 
-			foreach (var schedule in schedules)
-			{
-				Console.WriteLine(schedule.ToString());
-			}
+            // Get Schedules
+            var schedules = scheduleQuery.GetAllSchedules();
 
-			using (var streamReader = new StreamReader(@"C:\Dev\github\OrderScheduler\coding-assigment-orders.json"))
-			{
-				string json = streamReader.ReadToEnd();
-				Dictionary<string, Order> orders = JsonConvert.DeserializeObject<Dictionary<string, Order>>(json);
+            // Print schedules
+            schedules.ForEach(schedule => Console.WriteLine(schedule.ToString()));
 
-				new Scheduler(schedules, orders).Schedule();
-			}
-		}
-	}
+            // Get orders
+            var orders = orderReader.GetOrders();
+
+            // Schedule orders
+            scheduler.Schedule(schedules, orders);
+        }
+    }
 }
