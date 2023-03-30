@@ -18,15 +18,15 @@ namespace OrderScheduler
 
             var mediator = host.Services.GetRequiredService<IMediator>();
 
-            var scheduleQuery = new GetScheduleListQuery();
-            var schedules = mediator.Send(scheduleQuery).Result;
-
-            schedules.ForEach(d => Console.WriteLine(d.ToString()));
-
             var itineraryQuery = new GetItineraryListQuery();
             var itineraries = mediator.Send(itineraryQuery).Result;
 
-            itineraries.ForEach(d => Console.WriteLine(d.ToString()));
+            itineraries.ForEach(d => 
+            {
+                Console.WriteLine(d.ToString());
+                d.Orders.ForEach(o => Console.WriteLine(o.ToString()));
+                Console.WriteLine();
+            });
         }
     }
 }

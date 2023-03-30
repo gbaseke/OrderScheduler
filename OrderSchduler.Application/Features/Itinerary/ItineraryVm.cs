@@ -13,7 +13,7 @@ namespace OrderSchduler.Application.Features.Itinerary
 
         public override string ToString()
         {
-            return $"order#: {Orders.Count}, flightNumber: {Schedule.ScheduleId}, departure: {Schedule.DepartureCity}, arrival: {Schedule.ArrivalCity}, day: {Schedule.DayId}";
+            return $"Quantity#: {Orders.Count}, flightNumber: {Schedule.ScheduleId}, departure: {Schedule.DepartureCity}, arrival: {Schedule.ArrivalCity}, day: {Schedule.DayId}";
         }
     }
 }
